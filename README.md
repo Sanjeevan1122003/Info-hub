@@ -218,7 +218,7 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 ## ✨ Author
 
 **Sanjeevan Sandy**  
-📧 [sanjeevan1122003@gmial.com]  
+📧 [sanjeevan1122003@gmail.com]  
 🔗 [GitHub Profile](https://github.com/Sanjeevan1122003/)
 
 ---
