@@ -58,7 +58,9 @@ const QuoteGenerator = () => {
                 <h4 className="heading">Quote for you <BsFillChatLeftQuoteFill /></h4>
                 <button type='button' onClick={fetchData} className='refesh-button'>Another</button>
                 </div>
-                <p>{error}</p>
+                <div className="error-container">
+                    <p>{error}</p>
+                </div>
             </div>
         );
     }
@@ -82,10 +84,7 @@ const QuoteGenerator = () => {
                 </div>
             ) : (
                 <>
-                    {error && <p className='error'>{error}</p>}
-                    
-                    {!error && data && (
-                        <div className='data-container'>
+                <div className='data-container'>
                             <div className='quote'>
                                 <p>"{data.content}"</p>
                             </div>
@@ -100,7 +99,6 @@ const QuoteGenerator = () => {
                                 </div>
                             </div>
                         </div>
-                    )}
                 </>
             )}
         </div>
@@ -108,4 +106,5 @@ const QuoteGenerator = () => {
 }
 
 export default QuoteGenerator
+
 
