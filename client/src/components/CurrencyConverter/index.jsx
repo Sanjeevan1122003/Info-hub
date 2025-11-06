@@ -18,7 +18,7 @@ const CurrencyConverter = () => {
 
     useEffect(() => {
         axios
-            .get("https://info-hub-8c91.vercel.app/api/currency")
+            .get("http://localhost:5000/api/currency")
             .then((res) => {
                 setRates(res.data.rates);
 
@@ -33,7 +33,7 @@ const CurrencyConverter = () => {
                 setLoader(false);
             })
             .catch((err) => {
-                setError("Failed to load currency rates", err);
+                setError(err);
                 setLoader(false);
             });
     }, [from, to, amount]);
@@ -52,7 +52,7 @@ const CurrencyConverter = () => {
     return (
         <div className="currency-container">
             <h2 className="heading">Currency Converter <MdCurrencyExchange /></h2>
-            {error && <p>{error}</p>}
+            {error && <p error>{error}</p>}
             {loading ? (<><div className="loader-container">
                 <ThreeDots
                     visible={true}
