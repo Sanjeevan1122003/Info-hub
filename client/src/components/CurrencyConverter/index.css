@@ -104,3 +104,18 @@
   font-weight: 600;
   color: #67c1dc;
 }
+
+.convert-btn {
+  padding: 10px 20px;
+  background-color: #67c1dc;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.convert-btn:hover {
+ background-color: #67c1dc;
+}
