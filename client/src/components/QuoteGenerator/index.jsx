@@ -15,12 +15,11 @@ const QuoteGenerator = () => {
         try {
             setLoader(true);
             setError("");
-            const response = await axios.get("https://info-hub-8c91.vercel.app/api/quote");
+            const response = await axios.get("http://localhost:5000/api/quote");
             setData(response.data);
             setLoader(false);
         } catch (err) {
-            console.error("Error fetching quote:", err);
-            setError("Failed to fetch quote. Please try again.");
+            setError(err);
             setLoader(false);
         }
     };
@@ -28,14 +27,6 @@ const QuoteGenerator = () => {
     useEffect(() => {
         fetchData()
     }, []);
-
-    if (error) {
-        return (
-            <div className="">
-                <p>{error}</p>
-            </div>
-        );
-    }
 
     return (
         <div className="quote-container">
@@ -53,6 +44,7 @@ const QuoteGenerator = () => {
                     ariaLabel="three-dots-loading"
                 />
             </div></>):(<>
+            {error && <p className='error'>{error}</p>}
             <div className='data-container'>
                 <div className='quote'>
                     <p>"{data.content}"</p>
