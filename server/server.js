@@ -468,9 +468,9 @@ app.get("/api/weather", async (req, res) => {
         });
     } catch (error) {
         if (error.response && error.response.status === 404) {
-            res.status(404).json({ message: "City not found. Please enter a valid city name." });
+            res.status(404).json({error});
         } else {
-            res.status(500).json({ message: "Failed to fetch the weather. Please try again later." });
+            res.status(500).json({error});
         }
     }
 });
@@ -489,7 +489,7 @@ app.get("/api/currency", async (req, res) => {
         });
     }
     catch (error) {
-        res.status(500).json({ message: "Failed to fetch currency rates" });
+        res.status(500).json({error});
     }
 });
 
@@ -499,7 +499,7 @@ app.get("/api/quote", async (req, res) => {
         res.json(quote);
     }
     catch(error) {
-        res.status(500).json({message: "Failed to fetch quote"});
+        res.status(500).json({errro});
     }
 })
 
