@@ -38,14 +38,12 @@ const WeatherModule = () => {
                     fetchWeather(cityData);
 
                 } catch (err) {
-                    console.error("Weather fetch error:", err);
-                    setError("Failed to fetch weather data. Please try again.");
+                    setError(err);
                     setLoading(false);
                 }
             },
             (err) => {
-                console.error("Geolocation error:", err);
-                setError("Please enable location access to fetch weather data.");
+                setError(err);
                 setLoading(false);
             }
         );
@@ -57,14 +55,13 @@ const WeatherModule = () => {
             setLoading(true);
             setError("");
             const response = await axios.get(
-                `https://info-hub-8c91.vercel.app/api/weather?city=${targetCity}`
+                `http://localhost:5000/api/weather?city=${targetCity}`
             );
             setData(response.data);
             setCity(targetCity);
             setLoading(false);
         } catch (err) {
-            console.error("Weather API error:", err);
-            setError("City not found. Please check the spelling and try again.");
+            setError(err);
             setLoading(false);
         }
     };
