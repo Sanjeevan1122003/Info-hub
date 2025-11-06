@@ -52,7 +52,7 @@ const CurrencyConverter = () => {
     return (
         <div className="currency-container">
             <h2 className="heading">Currency Converter <MdCurrencyExchange /></h2>
-            {error && <p style={{ color: red, }}>{error}</p>}
+            {error && <p>{error}</p>}
             {loading ? (<><div className="loader-container">
                 <ThreeDots
                     visible={true}
