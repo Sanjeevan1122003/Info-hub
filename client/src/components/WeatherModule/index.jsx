@@ -129,19 +129,22 @@ const WeatherModule = () => {
         }
     };
 
+    if (error) {
+        return (
+            <div className="weather-container">
+                <h2 className="heading">Weather report <TiWeatherPartlySunny /> </h2>
+                <div className="error-container">
+                    <p>{error}</p>
+                    <button type="button" onClick={() => fetchWeather(city)}>Retry</button>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="weather-container">
             <h2 className="heading">Weather report <TiWeatherPartlySunny /> </h2>
-
-            {error && (
-                <div className="error-container">
-                    <p>{error}</p>
-                    <button type="button" onClick={() => fetchWeather(city || "Hyderabad")}>
-                        Retry
-                    </button>
-                </div>
-            )}
-
+            
             {loading ? (
                 <div className="loader-container">
                     <ThreeDots visible={true} height="50" width="50" color="#67c1dc" />
@@ -195,4 +198,5 @@ const WeatherModule = () => {
 };
 
 export default WeatherModule;
+
 
