@@ -18,7 +18,7 @@ const CurrencyConverter = () => {
 
     useEffect(() => {
         axios
-            .get("http://localhost:5000/api/currency")
+            .get("https://info-hub-8c91.vercel.app/api/currency")
             .then((res) => {
                 setRates(res.data.rates);
 
@@ -119,5 +119,6 @@ const CurrencyConverter = () => {
         </div >
     );
 }
+
 
 export default CurrencyConverter
