@@ -105,7 +105,13 @@ const CurrencyConverter = () => {
 
             {loading ? (
                 <div className="loader-container">
-                    <ThreeDots visible={true} height="50" width="50" />
+                    <ThreeDots
+                    visible={true}
+                    height="50"
+                    width="50"
+                    color="#67c1dc"
+                    ariaLabel="three-dots-loading"
+                />
                 </div>
             ) : (
                 <div className="inputdetails">
@@ -183,3 +189,4 @@ const CurrencyConverter = () => {
 };
 
 export default CurrencyConverter;
+
