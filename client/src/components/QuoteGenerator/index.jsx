@@ -51,6 +51,18 @@ const QuoteGenerator = () => {
         fetchData()
     }, [])
 
+     if (error) {
+        return (
+            <div className="quote-container">
+            <div className="top-contaier"> 
+                <h4 className="heading">Quote for you <BsFillChatLeftQuoteFill /></h4>
+                <button type='button' onClick={fetchData} className='refesh-button'>Another</button>
+                </div>
+                <p>{error}</p>
+            </div>
+        );
+    }
+
     return (
         <div className="quote-container">
             <div className="top-contaier"> 
@@ -96,3 +108,4 @@ const QuoteGenerator = () => {
 }
 
 export default QuoteGenerator
+
