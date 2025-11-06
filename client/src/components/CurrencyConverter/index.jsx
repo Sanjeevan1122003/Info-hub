@@ -9,7 +9,7 @@ const CurrencyConverter = () => {
     const [rates, setRates] = useState({});
     const [from, setFrom] = useState("USD");
     const [to, setTo] = useState("INR");
-    const [amount, setAmount] = useState("");
+    const [amount, setAmount] = useState(1);
     const [result, setResult] = useState(null);
     const [error, setError] = useState("");
     const [loading, setLoader] = useState(true);
@@ -189,5 +189,6 @@ const CurrencyConverter = () => {
 };
 
 export default CurrencyConverter;
+
 
 
