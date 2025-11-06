@@ -38,25 +38,38 @@ const CurrencyConverter = () => {
     };
 
     const fetchData = async () => {
-        try {
-            setLoader(true);
-            setError("");
+    try {
+        setLoader(true);
+        setError("");
 
-            const res = await axios.get("https://info-hub-8c91.vercel.app/api/currency");
+        const res = await axios.get("https://info-hub-8c91.vercel.app/api/currency");
 
-            if (!res.data || !res.data.rates) {
-                setError("Unable to load currency rates.");
-                setLoader(false);
-                return;
-            }
-
-            setRates(res.data.rates);
+        if (!res.data || !res.data.rates) {
+            setError("Unable to load currency rates.");
             setLoader(false);
-        } catch (err) {
-            setError(formatError(err));
-            setLoader(false);
+            return;
         }
-    };
+
+        setRates(res.data.rates);
+
+        if (amount) {
+            const fromRate = res.data.rates[from];
+            const toRate = res.data.rates[to];
+
+            if (fromRate && toRate) {
+                const usdAmount = amount / fromRate;
+                const converted = usdAmount * toRate;
+                setResult(converted.toFixed(2));
+            }
+        }
+
+        setLoader(false);
+    } catch (err) {
+        setError(formatError(err));
+        setLoader(false);
+    }
+};
+
 
     useEffect(() => {
         fetchData();
@@ -189,6 +202,7 @@ const CurrencyConverter = () => {
 };
 
 export default CurrencyConverter;
+
 
 
 
