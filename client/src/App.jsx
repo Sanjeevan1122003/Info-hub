@@ -4,7 +4,7 @@ import WeatherModule from "./components/WeatherModule";
 import CurrencyConverter from "./components/CurrencyConverter";
 import QuoteGenerator from "./components/QuoteGenerator";
 import "./index.css";
-import "./app.css"
+import "./App.css"
 
 function App() {
   return (
