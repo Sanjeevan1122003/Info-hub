@@ -57,7 +57,7 @@ const WeatherModule = () => {
             setLoading(true);
             setError("");
             const response = await axios.get(
-                `http://localhost:5000/api/weather?city=${targetCity}`
+                `https://info-hub-8c91.vercel.app/api/weather?city=${targetCity}`
             );
             setData(response.data);
             setCity(targetCity);
