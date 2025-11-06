@@ -1,0 +1,20 @@
+.header {
+  width: 100vw;
+  margin: 0;
+  padding: 20px 0px;
+  background-color: #000000e2;
+}
+
+.header h2 {
+  color: #fff;
+  font-weight: 600;
+  font-size: 35px;
+  margin: 0;
+  letter-spacing: 1px;
+  margin-left: 40px;
+}
+
+.bottom-shadow {
+  padding: 1.5rem;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}

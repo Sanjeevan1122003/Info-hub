@@ -1,0 +1,106 @@
+.currency-container {
+  width: 90%;
+  height: 250px;
+  background-color: #000000e2;
+  border-radius: 20px;
+  padding: 20px 30px;
+  margin-bottom: 30px;
+}
+
+.inputdetails {
+  height: 70%;
+  width: 98%;
+  min-width: 1200px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.drop-down-inputs {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-top: 40px;
+  width: 330px;
+}
+
+.label {
+  color: #fff;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.inputdetails select {
+  height: 25px;
+  width: 100px;
+  text-align: center;
+  background-color: #67c1dc;
+  color: #000000e2;
+  font-weight: 800;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+}
+
+.inputdetails select option {
+  color: black;
+  background-color: #fff;
+  font-weight: 600;
+}
+
+.amount-container input {
+  background-color: #67c1dc;
+  color: #000000e2;
+  font-size: 18px;
+  font-weight: 800;
+  padding-left: 10px;
+  width: 195px;
+  border: none;
+  height: 25px;
+  border-radius: 4px;
+  margin-top: 20px;
+}
+
+.amount-container input::placeholder{
+  color: #000000e2;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.result-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.input-container {
+  width: 400px;
+  height: 200px;
+}
+
+.output-container {
+  width: 800px;
+  height: 200px;
+  margin-top: -20px;
+}
+
+.name {
+  font-size: 40px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.amount {
+  font-size: 40px;
+  font-weight: 600;
+  color: #67c1dc;
+}
+
+.exchange-icon {
+  font-size: 60px;
+  font-weight: 600;
+  color: #67c1dc;
+}
