@@ -15,7 +15,6 @@ const WeatherModule = () => {
     const [error, setError] = useState("");
     const hasFetched = useRef(false);
 
-    // ✅ Convert technical error → user-friendly message
     const formatError = (err) => {
         if (!err) return "Something went wrong.";
 
@@ -196,3 +195,4 @@ const WeatherModule = () => {
 };
 
 export default WeatherModule;
+
