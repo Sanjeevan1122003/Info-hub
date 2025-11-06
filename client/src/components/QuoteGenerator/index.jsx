@@ -15,7 +15,7 @@ const QuoteGenerator = () => {
         try {
             setLoader(true);
             setError("");
-            const response = await axios.get("http://localhost:5000/api/quote");
+            const response = await axios.get("https://info-hub-8c91.vercel.app/api/quote");
             setData(response.data);
             setLoader(false);
         } catch (err) {
