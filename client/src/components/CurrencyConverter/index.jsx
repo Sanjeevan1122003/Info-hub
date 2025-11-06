@@ -166,7 +166,7 @@ const CurrencyConverter = () => {
                     </div>
 
                     <div className="output-container">
-                        {result !== null && (
+                        {result && (
                             <div className="result-container">
                                 <div>
                                     <p className="name">{from}</p>
@@ -189,4 +189,5 @@ const CurrencyConverter = () => {
 };
 
 export default CurrencyConverter;
+
 
