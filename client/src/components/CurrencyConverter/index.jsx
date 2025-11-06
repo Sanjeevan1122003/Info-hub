@@ -30,7 +30,6 @@ const CurrencyConverter = () => {
             }
         }
 
-        // Network or no internet
         if (err.message === "Network Error") {
             return "No internet connection. Please check your network.";
         }
@@ -38,36 +37,39 @@ const CurrencyConverter = () => {
         return err.message || "Unexpected error occurred.";
     };
 
-    useEffect(() => {
+    const fetchData = async () => {
+    try {
         setLoader(true);
         setError("");
+        const res = await axios.get("https://info-hub-8c91.vercel.app/api/currency");
 
-        axios
-            .get("https://info-hub-8c91.vercel.app/api/currency")
-            .then((res) => {
-                if (!res.data || !res.data.rates) {
-                    setError("Unable to load currency rates.");
-                    setLoader(false);
-                    return;
-                }
+        if (!res.data || !res.data.rates) {
+            setError("Unable to load currency rates.");
+            setLoader(false);
+            return;
+        }
 
-                setRates(res.data.rates);
+        setRates(res.data.rates);
 
-                const fromRate = res.data.rates[from];
-                const toRate = res.data.rates[to];
+        const fromRate = res.data.rates[from];
+        const toRate = res.data.rates[to];
 
-                if (fromRate && toRate) {
-                    const converted = (amount / fromRate) * toRate;
-                    setResult(converted.toFixed(2));
-                }
+        if (fromRate && toRate) {
+            const converted = (amount / fromRate) * toRate;
+            setResult(converted.toFixed(2));
+        }
 
-                setLoader(false);
-            })
-            .catch((err) => {
-                setError(formatError(err));
-                setLoader(false);
-            });
-    }, [from, to, amount]);
+        setLoader(false);
+    } catch (err) {
+        setError(formatError(err));
+        setLoader(false);
+    }
+};
+
+useEffect(() => {
+    fetchData();
+}, [from, to, amount]);
+
 
     const handleConvert = () => {
         if (!rates[from] || !rates[to]) {
@@ -85,22 +87,26 @@ const CurrencyConverter = () => {
         setResult(converted.toFixed(2));
     };
 
+
+    if (error) {
+        return (
+            <div className="currency-container">
+            <h2 className="heading">
+                Currency Converter <MdCurrencyExchange />
+            </h2>
+                <div className="error-container">
+                    <p>{error}</p>
+                    <button type="button" onClick={fetchData}>Retry</button>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="currency-container">
             <h2 className="heading">
                 Currency Converter <MdCurrencyExchange />
             </h2>
-
-            {/* ✅ Clear error displayed to user */}
-            {error && (
-                <div className="error-container">
-                    <p>{error}</p>
-                    <button onClick={() => window.location.reload()}>
-                        Retry
-                    </button>
-                </div>
-            )}
-
             {loading ? (
                 <div className="loader-container">
                     <ThreeDots
@@ -182,3 +188,4 @@ const CurrencyConverter = () => {
 };
 
 export default CurrencyConverter;
+
