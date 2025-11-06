@@ -9,7 +9,7 @@ const CurrencyConverter = () => {
     const [rates, setRates] = useState({});
     const [from, setFrom] = useState("USD");
     const [to, setTo] = useState("INR");
-    const [amount, setAmount] = useState(1);
+    const [amount, setAmount] = useState("");
     const [result, setResult] = useState(null);
     const [error, setError] = useState("");
     const [loading, setLoader] = useState(true);
@@ -38,62 +38,57 @@ const CurrencyConverter = () => {
     };
 
     const fetchData = async () => {
-    try {
-        setLoader(true);
-        setError("");
-        const res = await axios.get("https://info-hub-8c91.vercel.app/api/currency");
+        try {
+            setLoader(true);
+            setError("");
 
-        if (!res.data || !res.data.rates) {
-            setError("Unable to load currency rates.");
+            const res = await axios.get("https://info-hub-8c91.vercel.app/api/currency");
+
+            if (!res.data || !res.data.rates) {
+                setError("Unable to load currency rates.");
+                setLoader(false);
+                return;
+            }
+
+            setRates(res.data.rates);
             setLoader(false);
-            return;
+        } catch (err) {
+            setError(formatError(err));
+            setLoader(false);
         }
+    };
 
-        setRates(res.data.rates);
-
-        const fromRate = res.data.rates[from];
-        const toRate = res.data.rates[to];
-
-        if (fromRate && toRate) {
-            const converted = (amount / fromRate) * toRate;
-            setResult(converted.toFixed(2));
-        }
-
-        setLoader(false);
-    } catch (err) {
-        setError(formatError(err));
-        setLoader(false);
-    }
-};
-
-useEffect(() => {
-    fetchData();
-}, [from, to, amount]);
-
-
+    useEffect(() => {
+        fetchData();
+    }, []);
+    
     const handleConvert = () => {
-        if (!rates[from] || !rates[to]) {
-            setError("Invalid currency selection.");
-            return;
-        }
-
         if (!amount || amount <= 0) {
             setError("Please enter a valid amount.");
             return;
         }
 
-        const usdAmount = amount / rates[from];
-        const converted = usdAmount * rates[to];
+        const fromRate = rates[from];
+        const toRate = rates[to];
+
+        if (!fromRate || !toRate) {
+            setError("Invalid currency selection.");
+            return;
+        }
+
+        const usdAmount = amount / fromRate;
+        const converted = usdAmount * toRate;
+
         setResult(converted.toFixed(2));
     };
-
 
     if (error) {
         return (
             <div className="currency-container">
-            <h2 className="heading">
-                Currency Converter <MdCurrencyExchange />
-            </h2>
+                <h2 className="heading">
+                    Currency Converter <MdCurrencyExchange />
+                </h2>
+
                 <div className="error-container">
                     <p>{error}</p>
                     <button type="button" onClick={fetchData}>Retry</button>
@@ -107,15 +102,10 @@ useEffect(() => {
             <h2 className="heading">
                 Currency Converter <MdCurrencyExchange />
             </h2>
+
             {loading ? (
                 <div className="loader-container">
-                    <ThreeDots
-                        visible={true}
-                        height="50"
-                        width="50"
-                        color="#67c1dc"
-                        ariaLabel="three-dots-loading"
-                    />
+                    <ThreeDots visible={true} height="50" width="50" />
                 </div>
             ) : (
                 <div className="inputdetails">
@@ -125,10 +115,7 @@ useEffect(() => {
                             <input
                                 type="number"
                                 value={amount}
-                                onChange={(e) => {
-                                    setAmount(e.target.value);
-                                    handleConvert();
-                                }}
+                                onChange={(e) => setAmount(e.target.value)}
                                 placeholder="Enter amount"
                             />
                         </div>
@@ -162,21 +149,29 @@ useEffect(() => {
                                 </select>
                             </div>
                         </div>
+
+                        <button
+                            className="convert-btn"
+                            type="button"
+                            onClick={handleConvert}
+                        >
+                            Convert
+                        </button>
                     </div>
 
                     <div className="output-container">
-                        {result && (
+                        {result !== null && (
                             <div className="result-container">
                                 <div>
                                     <p className="name">{from}</p>
-                                    <p className="amount">{amount || "0.00"}</p>
+                                    <p className="amount">{amount  || "0.00"}</p>
                                 </div>
 
                                 <FaExchangeAlt className="exchange-icon" />
 
                                 <div>
                                     <p className="name">{to}</p>
-                                    <p className="amount">{result || "0.00"}</p>
+                                    <p className="amount">{result  || "0.00"}</p>
                                 </div>
                             </div>
                         )}
@@ -188,4 +183,3 @@ useEffect(() => {
 };
 
 export default CurrencyConverter;
-
